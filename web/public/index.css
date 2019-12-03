@@ -1,0 +1,23 @@
+body {
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+form {
+    text-align: center;
+    margin: 10px;
+}
+
+input {
+    padding: 10px;
+    margin: 2px;
+    border: 1px solid grey;
+    width: 25rem;
+}
+
+button {
+    padding: 10px;
+    margin: 2px;
+    width: 26.5rem;
+}
