@@ -7,12 +7,16 @@ import './public/index.css'
 
 import Nav from './containers/Nav';
 
+import AppLayout from './components/Layouts/AppLayout';
+
 class App extends React.Component {
     render() {
         return (
             <ApolloProvider client={client}>
                 <Nav />
-                <Routes />
+                <AppLayout>
+                    <Routes />
+                </AppLayout>
             </ApolloProvider>
         )
     }

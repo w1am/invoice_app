@@ -29,8 +29,8 @@ export default {
                 };
             } catch (err) {
                 return {
-                    path: 'register',
-                    message: "Error registering user"
+                    path: 'client',
+                    message: "Error adding client"
                 }
             }
         }

@@ -26,7 +26,7 @@ export default () => (
         <Body>
             <CompanyName><Anchor href="/profile">{name.toUpperCase()}</Anchor></CompanyName>
             <List><Anchor href="/">Home</Anchor></List>
-            <List><Anchor href="/message">Message</Anchor></List>
+            <List><Anchor href="/create">Create</Anchor></List>
             <List><Anchor href="/clients">Clients</Anchor></List>
             <SignOutList><Anchor href="/signout">Sign out</Anchor></SignOutList>
         </Body>

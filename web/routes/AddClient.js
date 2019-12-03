@@ -23,9 +23,9 @@ class AddClient extends React.Component {
         const response = await this.props.mutate({
             variables: { name, email, phone, fax, address }
         })
-        const { ok, errors } = response.data
+        const { ok, errors } = response.data.addClient
         if (ok) {
-            this.props.history.push('/')
+            return this.props.history.push('/clients') 
         } else {
             this.setState({
                 err: errors.message
@@ -49,7 +49,7 @@ class AddClient extends React.Component {
                 <form>
                     <input type='text' name="name" value={name} placeholder='Name' onChange={this.onChange} /> <br />
                     <input type='email' name="email" value={email} placeholder='Email' onChange={this.onChange} /> <br />
-                    <input type='phone' name="phone" value={phone} placeholder='Phone' onChange={this.onChange} /> <br />
+                    <input type='text' name="phone" value={phone} placeholder='Phone' onChange={this.onChange} /> <br />
                     <input type='text' name="fax" value={fax} placeholder='Fax' onChange={this.onChange} /> <br />
                     <input type='text' name="address" value={address} placeholder='Address' onChange={this.onChange} /> <br />
                     <button onClick={this.onSubmit}>Add</button>

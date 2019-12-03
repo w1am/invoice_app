@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import Home from './Home';
-import Message from './Message';
+import CreateInvoice from './CreateInvoice';
 import Register from './Register';
 import Signin from './Signin';
 import AddClient from './AddClient';
@@ -49,7 +49,7 @@ export default () => (
 	<BrowserRouter>
 		<Switch>
 			<Route path='/' exact component={Home} />
-			<Route path='/message' exact component={Message} />
+			<Route path='/create' exact component={CreateInvoice} />
 			<Route path='/register' exact component={Register} />
 			<Route path='/signin' exact component={Signin} />
 			<Route path='/signout' exact component={Signout} />

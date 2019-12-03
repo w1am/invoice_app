@@ -1,11 +1,10 @@
 import React from 'react';
-import { graphql } from 'react-apollo';
-import { usersQuery } from '../graphql';
+import decode from 'jwt-decode';
 
 class Home extends React.Component {
     render() {
         return (
-            <div> Hello Home</div >
+            <h1>Home Page</h1>
         )
     }
 }

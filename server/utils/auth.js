@@ -4,7 +4,7 @@ import User from '../models/User';
 
 export const createToken = async (user, secret, secret2) => {
     const createToken = jwt.sign({
-        user: _.pick(user, ['id', 'email', 'companyName'])
+        user: _.pick(user, ['id', 'email', 'companyName', 'address', 'phone'])
     },
         secret
     )

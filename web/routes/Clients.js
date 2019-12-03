@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import decode from 'jwt-decode';
+import ClientButton from '../components/Buttons/ClientButton';
+import { Link } from 'react-router-dom';
 
 export default class Clients extends React.Component {
     constructor(props) {
@@ -20,21 +22,24 @@ export default class Clients extends React.Component {
     render() {
         const { clients } = this.state;
         return (
-            <ul>
-                {
-                    !clients ? null : clients.map(client => (
-                        <div key={client._id}>
-                            <li>{client.name}</li>
-                            <ul>
-                                <li>{client.email}</li>
-                                <li>{client.phone}</li>
-                                <li>{client.fax}</li>
-                                <li>{client.address}</li>
-                            </ul>
-                        </div>
-                    ))
-                }
-            </ul>
+            <div>
+                <Link to='/add-client'><ClientButton>Add Client</ClientButton></Link>
+                <ul>
+                    {
+                        !clients ? <p>Loading...</p> : clients.map(client => (
+                            <div key={client._id}>
+                                <li>{client.name}</li>
+                                <ul>
+                                    <li>{client.email}</li>
+                                    <li>{client.phone}</li>
+                                    <li>{client.fax}</li>
+                                    <li>{client.address}</li>
+                                </ul>
+                            </div>
+                        ))
+                    }
+                </ul>
+            </div>
         )
     }
 }
