@@ -10,6 +10,7 @@ import InvoiceHeadList from '../components/Invoice/InvoiceHeadList';
 import InvoiceHeadAppTitle from '../components/Invoice/InvoiceHeadAppTitle';
 import Money from '../components/Money/Money';
 import MoneyList from '../components/Money/MoneyList';
+import ClientInfo from '../components/Invoice/ClientInfo';
 
 class InvoicePage extends React.Component {
     constructor(props) {
@@ -35,13 +36,8 @@ class InvoicePage extends React.Component {
     componentDidMount() {
         const currentUser = decode(localStorage.getItem('token')).user;
         const client = localStorage.getItem('client');
-        this.setState({
-            address: currentUser.address,
-            phone: currentUser.phone,
-            email: currentUser.email,
-            companyName: currentUser.companyName,
-            client: client,
-        })
+        const { address, phone, email, companyName } = currentUser;
+        this.setState({ address, phone, email, companyName, client })
     }
     render() {
         const { email, companyName, address, phone, client } = this.state;
@@ -55,14 +51,15 @@ class InvoicePage extends React.Component {
                         <InvoiceInfoList>{address}</InvoiceInfoList>
                         <br />
                         <InvoiceInfoList>{email}</InvoiceInfoList>
+                        <br />
                         <InvoiceInfoList>{phone}</InvoiceInfoList>
                     </InvoiceInfo>
                     <InvoiceHead>
                         <InvoiceHeadList>{companyName}</InvoiceHeadList>
                         <InvoiceHeadAppTitle>INVOICE</InvoiceHeadAppTitle>
                     </InvoiceHead>
-                    <p>Bill to:</p>
-                    <p>{client}</p>
+                    <ClientInfo style={{ fontWeight: '800' }}>Bill to:</ClientInfo>
+                    <ClientInfo>{client}</ClientInfo>
                     <Moment format="DD/MM/YYYY">
                         {date}
                     </Moment>

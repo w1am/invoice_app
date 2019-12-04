@@ -42,11 +42,19 @@ class Item extends React.Component {
             discountedPrice = amount - ((discount * amount) * 0.01);
         } else if (discountOption == 4) {
             discountedPrice = amount - discountValue
+        } else {
+            if (discountedPrice == 0) {
+                discountedPrice = amount
+            }
         }
         let tempTotal = total;
         let tempSubTotal = total;
-        tempTotal += discountedPrice;
         tempSubTotal += amount
+        if (discountedPrice == 0) {
+            tempTotal += tempSubTotal;
+        } else {
+            tempTotal += discountedPrice;
+        }
 
         const storedInfo = {
             "subTotal": tempSubTotal,
@@ -55,7 +63,7 @@ class Item extends React.Component {
         }
 
         localStorage.setItem('money', JSON.stringify(storedInfo));
-        
+
         const data = {
             "description": description,
             "unitCost": unitCost,
@@ -72,8 +80,7 @@ class Item extends React.Component {
     }
 
     getDiscountOption() {
-        const { discountValue } = this.props;
-        const { discount, discountOption } = this.props;
+        const { discountValue, discountOption } = this.props;
         if (discountOption == 2) {
             return (
                 <input type='number' name="discountValue" value={discountValue} placeholder='Discount %' onChange={this.onChange} />

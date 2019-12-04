@@ -1,7 +1,7 @@
 import React from 'react';
-import { graphql } from 'react-apollo';
 import decode from 'jwt-decode';
 import axios from 'axios';
+
 import Item from './Item';
 
 import InvoiceLayout from '../components/Layouts/InvoiceLayout';
@@ -60,7 +60,6 @@ class CreateInvoice extends React.Component {
                     </p>
                     {this.getDiscountOption()}
                     <p>
-                        {/* this.setState({ client: e.target.value }) */}
                         <label>Select client</label> <br />
                         <select onChange={(e) => localStorage.setItem('client', e.target.value)}>
                             <option value="Not specified">Not Specified</option>
@@ -71,7 +70,7 @@ class CreateInvoice extends React.Component {
                             }
                         </select>
                     </p>
-                    <Item discount={discountValue} discountOption={discountOption} />
+                    <Item discount={discountValue} discountOption />
                 </InvoiceLayout>
             </div>
         )

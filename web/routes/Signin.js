@@ -17,13 +17,10 @@ class Signin extends React.Component {
     async onSubmit(e) {
         e.preventDefault();
         const { email, password } = this.state;
-        console.log(email, password)
         const response = await this.props.mutate({
             variables: { email, password }
         })
-        console.log(response);
         const { ok, errors, token, refreshToken } = response.data.signin;
-        console.log(errors);
         if (ok) {
             localStorage.setItem('token', token);
             localStorage.setItem('refreshToken', refreshToken)

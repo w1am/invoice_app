@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Home from './Home';
 import CreateInvoice from './CreateInvoice';
@@ -11,40 +11,6 @@ import Signout from './Signout';
 import Goodbye from './Goodbye';
 import Clients from './Clients';
 import InvoicePage from './InvoicePage';
-
-const isAuthenticated = () => {
-	const token = localStorage.getItem('token');
-	const refreshToken = localStorage.getItem('refreshToken');
-	try {
-		if (token) {
-			decode(token, { header: true });
-		}
-		if (refreshToken) {
-			decode(refreshToken, { header: true });
-		}
-	} catch (err) {
-		return false;
-	}
-
-	return true;
-};
-
-const PrivateRoute = ({ component: Component, ...rest }) => (
-	<Route
-		{...rest}
-		render={props =>
-			(isAuthenticated() ? (
-				<Component {...props} />
-			) : (
-					<Redirect
-						to={{
-							pathname: '/login',
-							state: { isAuthenticated: false }
-						}}
-					/>
-				))}
-	/>
-);
 
 export default () => (
 	<BrowserRouter>

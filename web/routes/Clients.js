@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import decode from 'jwt-decode';
-import ClientButton from '../components/Buttons/ClientButton';
 import { Link } from 'react-router-dom';
 
 export default class Clients extends React.Component {
