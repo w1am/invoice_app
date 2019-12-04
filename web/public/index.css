@@ -14,6 +14,15 @@ h6 {
   color: #353535;
 }
 
+@media print {
+  @page {
+    margin: 0
+  }
+  body {
+    margin: 1.6cm;
+  }
+}
+
 table {
   border-collapse: collapse;
   width: 100%;

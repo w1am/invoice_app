@@ -32,6 +32,7 @@ class CreateInvoice extends React.Component {
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value });
     }
+
     getDiscountOption() {
         const { discountOption, discountValue } = this.state;
         if (discountOption == 3 || discountOption == 4) {
@@ -45,32 +46,34 @@ class CreateInvoice extends React.Component {
     render() {
         const { clients, discountValue, discountOption } = this.state;
         return (
-            <InvoiceLayout>
-                <h1>Create Invoice</h1>
-                <p>
-                    <label>Discount</label> <br />
-                    <select onChange={(e) => this.setState({ discountOption: e.target.value })}>
-                        <option value="1">No discount</option>
-                        <option value="2">Discount per item</option>
-                        <option value="3">Percentage</option>
-                        <option value="4">Flat amount</option>
-                    </select>
-                </p>
-                {this.getDiscountOption()}
-                <p>
-                    {/* this.setState({ client: e.target.value }) */}
-                    <label>Select client</label> <br />
-                    <select onChange={(e) => localStorage.setItem('client', e.target.value)}>
-                        <option value="Not specified">Not Specified</option>
-                        {
-                            !clients ? null : clients.map(client => (
-                                <option key={client._id} value={client.name}>{client.name}</option>
-                            ))
-                        }
-                    </select>
-                </p>
-                <Item discount={discountValue} discountOption={discountOption} />
-            </InvoiceLayout>
+            <div>
+                <InvoiceLayout>
+                    <h1>Create Invoice</h1>
+                    <p>
+                        <label>Discount</label> <br />
+                        <select onChange={(e) => this.setState({ discountOption: e.target.value })}>
+                            <option value="1">No discount</option>
+                            <option value="2">Discount per item</option>
+                            <option value="3">Percentage</option>
+                            <option value="4">Flat amount</option>
+                        </select>
+                    </p>
+                    {this.getDiscountOption()}
+                    <p>
+                        {/* this.setState({ client: e.target.value }) */}
+                        <label>Select client</label> <br />
+                        <select onChange={(e) => localStorage.setItem('client', e.target.value)}>
+                            <option value="Not specified">Not Specified</option>
+                            {
+                                !clients ? null : clients.map(client => (
+                                    <option key={client._id} value={client.name}>{client.name}</option>
+                                ))
+                            }
+                        </select>
+                    </p>
+                    <Item discount={discountValue} discountOption={discountOption} />
+                </InvoiceLayout>
+            </div>
         )
     }
 }
