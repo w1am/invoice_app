@@ -10,6 +10,7 @@ import Welcome from './Welcome';
 import Signout from './Signout';
 import Goodbye from './Goodbye';
 import Clients from './Clients';
+import InvoicePage from './InvoicePage';
 
 const isAuthenticated = () => {
 	const token = localStorage.getItem('token');
@@ -57,6 +58,7 @@ export default () => (
 			<Route path='/clients' exact component={Clients} />
 			<Route path='/welcome' exact component={Welcome} />
 			<Route path='/bye' exact component={Goodbye} />
+			<Route path='/invoice' exact component={InvoicePage} />
 		</Switch>
 	</BrowserRouter>
 )

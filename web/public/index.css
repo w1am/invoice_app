@@ -1,11 +1,40 @@
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
 body {
   padding: 0px;
   margin: 0px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
-h1, h3, h4, h5, h6 {
-    color: #353535
+h1,
+h3,
+h4,
+h5,
+h6 {
+  color: #353535;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 20px 0px;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+i {
+  margin: 10px 22px;
+  font-size: 2em;
+  vertical-align: middle;
 }
 
 input,

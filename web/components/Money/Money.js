@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
 export default styled.ul`
-    padding: 0;
+    text-align: right;
     list-style: none;
 `
