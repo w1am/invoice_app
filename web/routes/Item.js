@@ -118,7 +118,7 @@ class Item extends React.Component {
                     <i className="fa fa-info-circle"></i>
                     Items will automatically be added to your favourites
                 </MessageInfo>
-                <button><Link style={{ color: 'white', textDecoration: 'none' }} onClick={this.saveInfo} to='/invoice'>Generate Invoice</Link></button>
+                <Link style={{ color: 'white', textDecoration: 'none' }} to='/invoice'><button onClick={this.saveInfo}>Generate Invoice</button></Link>
             </div>
         )
     }

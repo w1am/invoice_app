@@ -23,22 +23,29 @@ export default class Clients extends React.Component {
         const { clients } = this.state;
         return (
             <div>
-                <Link to='/add-client'><ClientButton>Add Client</ClientButton></Link>
-                <ul>
-                    {
-                        !clients ? <p>Loading...</p> : clients.map(client => (
-                            <div key={client._id}>
-                                <li>{client.name}</li>
-                                <ul>
-                                    <li>{client.email}</li>
-                                    <li>{client.phone}</li>
-                                    <li>{client.fax}</li>
-                                    <li>{client.address}</li>
-                                </ul>
-                            </div>
-                        ))
-                    }
-                </ul>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>NAME</th>
+                            <th>EMAIL</th>
+                            <th>Phone</th>
+                            <th>FAX</th>
+                            <th>Address</th>
+                        </tr>
+                        {
+                            !clients ? <p>loading</p> : clients.map(client => (
+                                <tr key={client._id}>
+                                    <th>{client.name}</th>
+                                    <th>{client.email}</th>
+                                    <th>{client.phone}</th>
+                                    <th>{client.fax}</th>
+                                    <th>{client.address}</th>
+                                </tr>
+                            ))
+                        }
+                    </tbody>
+                </table>
+                <Link style={{ color: 'white', textDecoration: 'none' }} to='/add-client'><button>Add Client</button></Link>
             </div>
         )
     }
