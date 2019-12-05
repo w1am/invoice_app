@@ -84,9 +84,9 @@ class InvoicePage extends React.Component {
                         </tbody>
                     </table>
                     <Money>
-                        <MoneyList>Subtotal ${money.subTotal}</MoneyList>
-                        <MoneyList>Discount ({money.discount}%) ${money.subTotal - money.total}</MoneyList>
-                        <MoneyList>Total ${money.total}</MoneyList>
+                        <MoneyList><span>Subtotal</span> ${money.subTotal}</MoneyList>
+                        <MoneyList><span>Discount</span> ${money.subTotal - money.total}</MoneyList>
+                        <MoneyList><span>Total</span> ${money.total}</MoneyList>
                     </Money>
                 </Invoice>
                 <button onClick={this.printInvoice}>Print Invoice</button>

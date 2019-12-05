@@ -15,8 +15,7 @@ import InvoicePage from './InvoicePage';
 export default () => (
 	<BrowserRouter>
 		<Switch>
-			<Route path='/' exact component={Home} />
-			<Route path='/create' exact component={CreateInvoice} />
+			<Route path='/' exact component={CreateInvoice} />
 			<Route path='/register' exact component={Register} />
 			<Route path='/signin' exact component={Signin} />
 			<Route path='/signout' exact component={Signout} />

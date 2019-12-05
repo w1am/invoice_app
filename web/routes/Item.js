@@ -7,6 +7,8 @@ import MessageInfo from '../components/Messages/MessageInfo'
 import ItemTitle from '../components/Texts/ItemTitle';
 import { Link } from 'react-router-dom';
 
+import MessageError from '../components/Messages/MessageError';
+
 class Item extends React.Component {
     componentDidMount() {
         this.setState({ items: this.state.items.slice(1) })
@@ -22,39 +24,48 @@ class Item extends React.Component {
             total: 0,
             discountValue: 0,
             priceAfterDiscount: 0,
-            items: [{}]
+            items: [{}],
+            response: {
+                ok: true,
+                message: ""
+            }
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.getDiscountOption = this.getDiscountOption.bind(this);
         this.saveInfo = this.saveInfo.bind(this);
+        this.checkErrors = this.checkErrors.bind(this);
     }
 
     async onSubmit(e) {
         e.preventDefault();
-        const { description, unitCost, quantity, additionalDetails, total, priceAfterDiscount, discountValue } = this.state;
+        const { description, unitCost, amount, quantity, additionalDetails, total, priceAfterDiscount, discountValue } = this.state;
         const { discount, discountOption } = this.props;
-        const amount = quantity * unitCost
+        let tempSubTotal = amount;
+        console.log('tempSubTotal', tempSubTotal)
+        let tempAmount = amount;
+        console.log('tempAmount', tempAmount)
+        tempAmount = quantity * unitCost;
+        console.log('tempAmount q * unitcos', tempAmount)
+        tempSubTotal += tempAmount;
+        console.log('tempSubTotal', tempSubTotal);
         let discountedPrice = priceAfterDiscount;
         if (discountOption == 2) {
-            discountedPrice = amount - ((discountValue * amount) * 0.01);
+            discountedPrice = tempAmount - ((discountValue * tempAmount) * 0.01);
         } else if (discountOption == 3) {
-            discountedPrice = amount - ((discount * amount) * 0.01);
+            discountedPrice = tempAmount - ((discount * tempAmount) * 0.01);
         } else if (discountOption == 4) {
-            discountedPrice = amount - discountValue
+            discountedPrice = tempAmount - discountValue
         } else {
             if (discountedPrice == 0) {
-                discountedPrice = amount
+                discountedPrice = tempAmount
             }
         }
+
+        console.log(discountedPrice)
+
         let tempTotal = total;
-        let tempSubTotal = total;
-        tempSubTotal += amount
-        if (discountedPrice == 0) {
-            tempTotal += tempSubTotal;
-        } else {
-            tempTotal += discountedPrice;
-        }
+        tempTotal += discountedPrice;
 
         const storedInfo = {
             "subTotal": tempSubTotal,
@@ -68,15 +79,38 @@ class Item extends React.Component {
             "description": description,
             "unitCost": unitCost,
             "quantity": quantity,
-            "amount": amount,
+            "amount": tempAmount,
             "additionDetails": additionalDetails,
             "priceAfterDiscount": discountedPrice
         }
 
-        this.setState({
-            items: [...this.state.items, data],
-            total: tempTotal
-        })
+        let errors = this.checkErrors();
+        if (errors) {
+            this.setState({
+                response: {
+                    ok: false,
+                    message: "Make sure you select a client, add a description, a unit cost and quantity"
+                }
+            })
+        } else {
+            this.setState({
+                items: [...this.state.items, data],
+                total: tempTotal,
+                amount: tempAmount,
+                response: {
+                    ok: true,
+                    message: ''
+                }
+            })
+        }
+    }
+
+    checkErrors() {
+        const { description, unitCost, quantity } = this.state;
+        const client = localStorage.getItem('client');
+        if (client == "Not specified" || !client || description == '' || unitCost == '' || quantity == '') {
+            return true
+        }
     }
 
     getDiscountOption() {
@@ -98,15 +132,28 @@ class Item extends React.Component {
     }
 
     render() {
-        const { description, unitCost, quantity, additionalDetails, total, items } = this.state;
+        const { description, unitCost, quantity, additionalDetails, total, items, response } = this.state;
+        console.log(response)
         return (
             <div>
                 <form>
-                    <input type='text' name="description" value={description} placeholder='Description' onChange={this.onChange} />
-                    <input type='number' name="unitCost" value={unitCost} placeholder='Unit cost' onChange={this.onChange} /> <br />
-                    <input type='number' name="quantity" value={quantity} placeholder='Quantity' onChange={this.onChange} />
-                    <input type='text' name="additionalDetails" value={additionalDetails} placeholder='Addition Details' onChange={this.onChange} /> <br />
+                    <label>Description</label>
+                    <input type='text' name="description" placeholder="eg. Service Fee" value={description} onChange={this.onChange} />
+                    <label>Unit Cost</label>
+                    <input type='number' name="unitCost" value={unitCost} onChange={this.onChange} /> <br />
+                    <label>Quantity</label>
+                    <input type='number' name="quantity" value={quantity} onChange={this.onChange} />
+                    <label>Additional Details</label>
+                    <input type='text' name="additionalDetails" value={additionalDetails} onChange={this.onChange} /> <br />
                     {this.getDiscountOption()}
+                    {
+                        response.ok ? null : (
+                            <MessageError id="msg-error">
+                                <i className="fa fa-times-circle"></i>
+                                {response.message}
+                            </MessageError>
+                        )
+                    }
                     <button onClick={this.onSubmit}>Add Item</button>
                 </form>
                 <h1>Items - ${total}</h1>

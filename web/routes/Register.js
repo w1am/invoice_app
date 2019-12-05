@@ -2,6 +2,8 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import { registerMutation } from '../graphql';
 
+import MessageError from '../components/Messages/MessageError';
+
 class Register extends React.Component {
     constructor(props) {
         super(props);
@@ -17,7 +19,8 @@ class Register extends React.Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    async onSubmit() {
+    async onSubmit(e) {
+        e.preventDefault();
         const { companyName, address, phone, email, password } = this.state;
         const response = await this.props.mutate({
             variables: { companyName, address, phone, email, password }
@@ -25,7 +28,7 @@ class Register extends React.Component {
         const { ok, errors } = response.data.register;
         console.log(errors);
         if (ok) {
-            this.props.history.push('/')
+            this.props.history.push('/welcome')
         } else {
             this.setState({
                 err: errors.message
@@ -55,7 +58,10 @@ class Register extends React.Component {
                     <button onClick={this.onSubmit}>Create</button>
                 </form>
                 {errList.length ? (
-                    <p>{errList[0]}</p>
+                    <MessageError>
+                        <i className="fa fa-times-circle"></i>
+                        {errList[0]}
+                    </MessageError>
                 ) : null}
             </div>
         )

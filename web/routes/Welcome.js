@@ -2,7 +2,7 @@ import React from 'react';
 
 export default () => (
     <div>
-        <h1>Welcome Back!</h1>
-        <a href="/home">Return Home</a>
+        <h1 style={{textAlign:'center'}}>Welcome Back!</h1>
+        <button><a style={{color: 'white', textDecoration: 'none'}} href="/">Create Invoice</a></button>
     </div>
 )

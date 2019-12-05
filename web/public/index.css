@@ -4,6 +4,7 @@ body {
   padding: 0px;
   margin: 0px;
   font-family: "Open Sans", sans-serif;
+  background-color: #f9f9f9;
 }
 
 h1,
@@ -14,9 +15,50 @@ h6 {
   color: #353535;
 }
 
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+
+span {
+  font-weight: 600;
+  padding: 0 50px;
+}
+
 @media print {
   @page {
-    margin: 0
+    margin: 0;
   }
   body {
     margin: 1.6cm;
@@ -50,7 +92,7 @@ input,
 select {
   width: 100%;
   padding: 12px 20px;
-  margin: 8px 0;
+  margin: 8px 0px;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -58,21 +100,28 @@ select {
 }
 
 button {
-  background-color: #55c290;
+  background-color: #0062cc;
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
-  font-weight: 600;
-  border: 1px solid #55c290;
+  font-weight: 500;
+  border: 1px solid #0062cc;
   color: white;
   border-radius: 4px;
   box-sizing: border-box;
 }
 
 button:hover {
-  background-color: #66dba4;
-  border: 1px solid #66dba4;
+  background-color: #007bff;
+  border: 1px solid #007bff;
   cursor: pointer;
   transition: 0.5s;
+}
+
+button:disabled,
+button[disabled] {
+  border: 1px solid #6aa2ff;
+  background-color: #6aa2ff;
+  color: #ffffff;
 }

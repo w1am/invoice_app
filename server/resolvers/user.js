@@ -16,17 +16,28 @@ export default {
         register: async (_, args) => {
             const { companyName, address, phone, email, password } = args;
             try {
-                const user = await new User({
-                    companyName,
-                    address,
-                    phone,
-                    email,
-                    password
-                }).save()
-                return {
-                    ok: true,
-                    user
-                };
+                const dbUser = await User.find({ address });
+                if (dbUser.length > 0) {
+                    return {
+                        ok: false,
+                        errors: {
+                            path: 'register',
+                            message: 'User already exists'
+                        }
+                    }
+                } else {
+                    const user = await new User({
+                        companyName,
+                        address,
+                        phone,
+                        email,
+                        password
+                    }).save()
+                    return {
+                        ok: true,
+                        user
+                    };
+                }
             } catch (err) {
                 return {
                     path: 'register',

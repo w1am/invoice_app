@@ -5,6 +5,7 @@ import axios from 'axios';
 import Item from './Item';
 
 import InvoiceLayout from '../components/Layouts/InvoiceLayout';
+import { Link } from 'react-router-dom';
 
 class CreateInvoice extends React.Component {
     constructor(props) {
@@ -49,28 +50,24 @@ class CreateInvoice extends React.Component {
             <div>
                 <InvoiceLayout>
                     <h1>Create Invoice</h1>
-                    <p>
-                        <label>Discount</label> <br />
-                        <select onChange={(e) => this.setState({ discountOption: e.target.value })}>
-                            <option value="1">No discount</option>
-                            <option value="2">Discount per item</option>
-                            <option value="3">Percentage</option>
-                            <option value="4">Flat amount</option>
-                        </select>
-                    </p>
+                    <label>Select client <Link style={{ color: "#0062CC" }} to='/clients'>(Add client)</Link></label> <br />
+                    <select onChange={(e) => localStorage.setItem('client', e.target.value)}>
+                        <option value="Not specified">Not Specified</option>
+                        {
+                            !clients ? null : clients.map(client => (
+                                <option key={client._id} value={client.name}>{client.name}</option>
+                            ))
+                        }
+                    </select>
+                    <label>Discount</label> <br />
+                    <select onChange={(e) => this.setState({ discountOption: e.target.value })}>
+                        <option value="1">No discount</option>
+                        <option value="2">Discount per item</option>
+                        <option value="3">Percentage</option>
+                        <option value="4">Flat amount</option>
+                    </select>
                     {this.getDiscountOption()}
-                    <p>
-                        <label>Select client</label> <br />
-                        <select onChange={(e) => localStorage.setItem('client', e.target.value)}>
-                            <option value="Not specified">Not Specified</option>
-                            {
-                                !clients ? null : clients.map(client => (
-                                    <option key={client._id} value={client.name}>{client.name}</option>
-                                ))
-                            }
-                        </select>
-                    </p>
-                    <Item discount={discountValue} discountOption />
+                    <Item discount={discountValue} discountOption={discountOption} />
                 </InvoiceLayout>
             </div>
         )

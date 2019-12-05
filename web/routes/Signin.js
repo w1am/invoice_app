@@ -2,6 +2,8 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import { signinMutation } from '../graphql';
 
+import MessageError from '../components/Messages/MessageError';
+
 class Signin extends React.Component {
     constructor(props) {
         super(props);
@@ -51,7 +53,10 @@ class Signin extends React.Component {
                     <button onClick={this.onSubmit}>Sign in</button>
                 </form>
                 {errList.length ? (
-                    <p>{errList[0]}</p>
+                    <MessageError>
+                        <i className="fa fa-times-circle"></i>
+                        {errList[0]}
+                    </MessageError>
                 ) : null}
             </div>
         )

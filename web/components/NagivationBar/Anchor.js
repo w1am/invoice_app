@@ -5,7 +5,7 @@ export default styled.a`
     color: #818181;
     font-weight: 600;
     &:hover {
-        color: #55c290;
-        transition: 0.2s;
+        color: #0062CC;
+        transition: 0.4s;
     }
 `
